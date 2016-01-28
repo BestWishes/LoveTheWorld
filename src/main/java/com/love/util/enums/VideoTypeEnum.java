@@ -17,11 +17,11 @@ public enum VideoTypeEnum {
 	/**
 	 * H¶¯Âþ
 	 */
-	HCOMIC("10"),
+	HCOMIC("2"),
 	/**
 	 *H3D 
 	 */
-	H3D("11");
+	H3D("3");
 	
 	private final String value;
 

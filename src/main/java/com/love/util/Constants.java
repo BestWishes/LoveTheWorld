@@ -12,7 +12,10 @@ public class Constants {
 	public static String SESSION_USER_ROLE="com.love."+"user_role";
 
 	
-	
+	/**
+	 * 影片固定路径前缀
+	 */
+	public static String VIDEO_FILEPATH_PREFIX="E:/BaiduYunDownload/720/";
 	
 	
 	/**

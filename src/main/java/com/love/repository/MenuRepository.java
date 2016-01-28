@@ -10,5 +10,5 @@ import com.love.main.entity.Menu;
 @Repository
 public interface MenuRepository extends JpaRepository<Menu, Long> {
 
-	public List<Menu> findAllMenusByRole(String role);
+	public List<Menu> findAllMenusByRoleLike(String role);
 }

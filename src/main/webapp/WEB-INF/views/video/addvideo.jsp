@@ -12,6 +12,7 @@
 	<script type="text/javascript">
 	$("#addvideoform").form({
 		url:'addvideo',
+		method:'post',
 		novalidate:true,
 		ajax:true,
 		
@@ -28,20 +29,15 @@
 				timeout:2000,
 				showType:'show'
 			});		
+			$("#name").filebox("setValue","");
 			return false;
 		}
 	
 	});
 		$("#addvideoform_submit_id").click(function() {
-// 			var fs=document.getElementById("filepath").value;
-// 			$.messager.show({
-// 				title: '提示',
-// 				msg: fs,
-// 				timeout:2000,
-// 				showType:'show'
-// 			});
+			var name=$("#name").filebox('getValue');
 			$("#addvideoform").form('submit',{
-				queryParams:{'path':fs}
+				queryParams:{'name':name}
 			});
 		});
 
@@ -53,7 +49,7 @@
 					<td>观看权限</td>
 					<td><input id="video_level_select" class="easyui-combobox"
 						name="level"
-						data-options="valueField:'id',
+						data-options="valueField:'dictDataValue',
 					        textField:'dictDataName',
 					        url:'dictDataList',
 					        queryParams:{'dictValue':'<%=Constants.DICTIONAYDATA_VIDEOLEVEL%>'},
@@ -61,7 +57,7 @@
 					        onLoadSuccess:function(){
 					        	var temp = $(this).combobox('getData');
 					        	if(temp.length>0){
-					        	 $(this).combobox('select', temp[0].id);
+					        	 $(this).combobox('select', temp[0].dictDataValue);
 					        	}
 					        }
 					        "/>
@@ -71,7 +67,7 @@
 					<td>影片类型</td>
 					<td><input id="video_type_select" class="easyui-combobox"
 						name="type"
-						data-options="valueField:'id',
+						data-options="valueField:'dictDataValue',
 					        textField:'dictDataName',
 					        url:'dictDataList',
 					        queryParams:{'dictValue':'<%=Constants.DICTIONAYDATA_VIDEOTYPE%>'},
@@ -81,7 +77,7 @@
 					        onLoadSuccess:function(){
 					        	var temp = $(this).combobox('getData');
 					        	if(temp.length>0){
-					        	 $(this).combobox('select', temp[0].id);
+					        	 $(this).combobox('select', temp[0].dictDataValue);
 					        	}
 					        }
 					        "/>
@@ -89,7 +85,7 @@
 				</tr>
 				<tr>
 					<td>影片路径</td>
-					<td><input class="easyui-filebox" id="filepath" required="required"
+					<td><input class="easyui-filebox" id="name" data-options="required:true,multiple:'ture',buttonText:'选择文件',buttonAlign:'left',width:200"
 						multiple="multiple" />
 						</td>
 				</tr>

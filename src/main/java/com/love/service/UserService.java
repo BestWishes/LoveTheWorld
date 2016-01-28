@@ -37,7 +37,7 @@ public class UserService {
 		user.setRole(UserRoleEnum.ADMIN.getValue());
 		user.setStatus(UserStatusEnum.PASSED.getValue());
 		
-		user.setCreaterId(1L);
+		user.setCreaterId("1");
 		user.setCreateTime(new Date());
 		User user2=userRepository.save(user);
 		

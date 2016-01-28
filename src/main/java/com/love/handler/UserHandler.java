@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.love.main.entity.User;
 import com.love.service.UserService;
@@ -35,7 +34,7 @@ public class UserHandler {
 			httpSession.removeAttribute(Constants.SESSION_USER_STATUS);
 			httpSession.removeAttribute(Constants.SESSION_USER_ROLE);
 		}else {
-			httpSession.setAttribute(Constants.SESSION_USER_ID, user_login.getId());
+			httpSession.setAttribute(Constants.SESSION_USER_ID, user_login.getuId());
 			httpSession.setAttribute(Constants.SESSION_USER_NAME, user_login.getName());
 			httpSession.setAttribute(Constants.SESSION_USER_STATUS, user_login.getStatus());
 			httpSession.setAttribute(Constants.SESSION_USER_ROLE,user_login.getRole());
@@ -58,7 +57,7 @@ public class UserHandler {
 	public String save(User user,HttpSession httpSession){
 		System.out.println(user);
 		user.setVersion(0l);
-		user.setCreaterId((Long)httpSession.getAttribute(Constants.SESSION_USER_ID));
+		user.setCreaterId((String)httpSession.getAttribute(Constants.SESSION_USER_ID));
 		user.setCreateTime(new Date());
 		userService.save(user);
 		return "main/NewFile";
@@ -67,7 +66,7 @@ public class UserHandler {
 	public String register(User user,HttpSession httpSession){
 		User user2=this.userService.save(user);
 		if (user2!=null) {
-			httpSession.setAttribute(Constants.SESSION_USER_ID, user.getId());
+			httpSession.setAttribute(Constants.SESSION_USER_ID, user.getuId());
 			httpSession.setAttribute(Constants.SESSION_USER_NAME, user.getName());
 			httpSession.setAttribute(Constants.SESSION_USER_STATUS, user.getStatus());
 			httpSession.setAttribute(Constants.SESSION_USER_ROLE,user.getRole());

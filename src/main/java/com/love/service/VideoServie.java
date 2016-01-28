@@ -11,6 +11,7 @@ import com.love.main.entity.Video;
 import com.love.model.VideoAttributesModel;
 import com.love.model.VideoModel;
 import com.love.repository.VideoRepository;
+import com.love.util.Constants;
 import com.love.util.enums.UserRoleEnum;
 import com.love.util.enums.VideoTypeEnum;
 
@@ -182,6 +183,7 @@ public class VideoServie {
 	
 	
 	public Video addVideo(Video video){
+		video.setPath(Constants.VIDEO_FILEPATH_PREFIX+video.getName());
 		return videoRepository.save(video);
 	}
 	public VideoRepository getVideoRepository() {

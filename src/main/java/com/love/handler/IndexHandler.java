@@ -50,7 +50,7 @@ public class IndexHandler {
 	@RequestMapping("/menu")
 	public String menu(HttpSession httpSession){
 		String role=(String)httpSession.getAttribute(Constants.SESSION_USER_ROLE);
-		if(role==null) role="";
+		if(role==null) role="2";
 		this.menuJson=menuService.getMenu(role);
 		
 		return this.menuJson;

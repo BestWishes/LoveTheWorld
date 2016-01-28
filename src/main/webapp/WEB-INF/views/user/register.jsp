@@ -8,27 +8,39 @@
 </head>
 <body>
 <script type="text/javascript">
-$(document).ready(function(){
 	$("#register_submit").click(function(){
 		$("#register_form").form('submit',{
 			url:'register',
-			success:function(){
-				$.messager.confirm('恭喜',"注册成功",function(r){
-					if(r){
-						window.location.href="http://localhost:8282/LoveTheWorld/";
-						}
-				});
+			method:'post',
+			onSubmit:function(){
+				if(!$("#register_form").form('validate')){
+					return false;
+				};
+			},
+			success:function(data){
+				$.messager.show({
+					title:'恭喜',
+					msg:data,
+					timeout:2000,
+				})
+// 				setTimeout(function(){window.location.href="http://localhost:8282/LoveTheWorld/"},2000);
+				window.location.href="http://localhost:8282/LoveTheWorld/";
 			}
 		});
 	});
-})
 </script>
-	<form id="register_form">
+	<form id="register_form" >
 		<table>
 			<tr>
 				<td>账号:</td>
 				<td>
-					<input id="name" name="name" class="easyui-validatebox">
+					<input id="uid" name="uid" class="easyui-validatebox" data-options="required:true,missingMessage:'请输入登录账号'">
+				</td>
+			</tr>
+			<tr>
+				<td>昵称:</td>
+				<td>
+					<input id="name" name="name" class="easyui-validatebox" data-options="required:true,missingMessage:'请输入用户昵称'">
 				</td>
 			</tr>
 			<tr>

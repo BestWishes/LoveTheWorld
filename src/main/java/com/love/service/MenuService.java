@@ -25,8 +25,9 @@ public class MenuService {
 
 	
 	public String getMenu(String role){
-//		List<Menu> menus=menuRepository.findAllMenusByRole(role);
-		List<Menu> menus=menuRepository.findAll();
+		role="%"+role+"%";
+		List<Menu> menus=menuRepository.findAllMenusByRoleLike(role);
+//		List<Menu> menus=menuRepository.findAll();
 		List<MenuModel> menuModels=new ArrayList<MenuModel>();
 		List<MenuModel> result=new ArrayList<MenuModel>();
 		for (Menu menu : menus) {

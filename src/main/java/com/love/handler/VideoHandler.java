@@ -6,16 +6,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.URLEncoder;
-import java.util.List;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadException;
-import org.apache.commons.fileupload.disk.DiskFileItemFactory;
-import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -57,9 +54,16 @@ public class VideoHandler {
 	@ResponseBody
 	@RequestMapping("addvideo")
 	public String addVideo(Video video,HttpSession httpSession,HttpServletRequest request,HttpServletResponse response) throws FileUploadException{
-		
-//		videoServie.addVideo(video);
-		return "video/addvideo";
+		video.setCreaterId((String)httpSession.getAttribute(Constants.SESSION_USER_ID));
+		video.setCreateTime(new Date());
+		video.setVersion(1l);
+		String[] nameString=video.getName().split("\\\\");
+		video.setName(nameString[nameString.length-1]);
+		if(videoServie.addVideo(video)!=null){
+			return "添加成功";
+		}else {
+			return "添加失败";
+		}
 
 	}
 	

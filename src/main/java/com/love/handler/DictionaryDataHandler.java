@@ -43,6 +43,13 @@ public class DictionaryDataHandler {
 		return JSON.toJSONString(this.dictionaryDataService.findAllByDictValue(dictValue));
 	}
 	
+	/**
+	 * 获取字典管理页面
+	 */
+	@RequestMapping("/dictionaryManage")
+	public String getDictionaryManage(){
+		return "dictionary/dictionary";
+	}
 	
 	public DictionaryDataService getDictionaryDataService() {
 		return dictionaryDataService;

@@ -9,6 +9,6 @@
 <title>Love The World</title>
 </head>
 <body>
-	<%=session.getAttribute(Constants.SESSION_USER_ID)%>
+	欢迎,<%=session.getAttribute(Constants.SESSION_USER_ROLE) %>：<%=session.getAttribute(Constants.SESSION_USER_NAME)%>
 </body>
 </html>
