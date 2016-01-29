@@ -253,7 +253,7 @@ $.fn.pagination.defaults={total:1,pageSize:10,pageNumber:1,pageList:[10,20,30,50
 },onBeforeRefresh:function(_2b,_2c){
 },onRefresh:function(_2d,_2e){
 },onChangePageSize:function(_2f){
-},beforePageText:"Page",afterPageText:"of {pages}",displayMsg:"Displaying {from} to {to} of {total} items",nav:{first:{iconCls:"pagination-first",handler:function(){
+},beforePageText:"第：",afterPageText:"/{pages}页",displayMsg:"显示{from} 到 {to}记录, 共 {total} 条记录",nav:{first:{iconCls:"pagination-first",handler:function(){
 var _30=$(this).pagination("options");
 if(_30.pageNumber>1){
 $(this).pagination("select",1);

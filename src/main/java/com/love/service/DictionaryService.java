@@ -1,10 +1,14 @@
 package com.love.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Sort.Order;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.love.main.entity.Dictionary;
 import com.love.repository.DictionaryRepository;
@@ -19,8 +23,19 @@ public class DictionaryService {
 	@Autowired
 	private DictionaryRepository dictionaryRepository;
 
-	public List<Dictionary> dictionaries(){
-		return dictionaryRepository.findAll();
+	public Page<Dictionary> dictionaries(String dictName,String dictValue,Integer size,Integer page){
+		if(dictName!=null){
+			dictName="%"+dictName+"%";
+		}
+		if(dictValue!=null){
+			dictValue="%"+dictValue+"%";
+		}
+		List<Order> orders=new ArrayList<Sort.Order>();
+		orders.add(new Order("isFixed"));
+		Sort sort=new Sort(orders);
+		PageRequest pageRequest=new PageRequest(page-1, size, sort);
+		
+		return dictionaryRepository.findAllByDictNameLikeAndDictValueLike(dictName, dictValue,pageRequest);
 	}
 
 	public DictionaryRepository getDictionaryRepository() {
